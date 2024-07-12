@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { supabase } from "../client";
 
 interface Creator {
@@ -10,20 +10,24 @@ interface Creator {
   created_at: string;
 }
 
-export default function useAllCreators() {
-  const [creators, setCreators] = useState<Creator[]>([]);
-
+export default function useAllCreators({
+  name,
+  url,
+  description,
+  imageURL,
+}: Creator) {
   useEffect(() => {
     const fetchCreators = async () => {
       try {
-        const { data, error } = await supabase
+        await supabase
           .from("creators")
-          .select()
-          .order("created_at", { ascending: true });
-
-        if (error) throw error;
-
-        setCreators(data);
+          .insert({
+            name: name,
+            url: url,
+            description: description,
+            imageURL: imageURL,
+          })
+          .select();
       } catch (err) {
         console.error(err);
       }
@@ -31,6 +35,4 @@ export default function useAllCreators() {
 
     fetchCreators();
   }, []);
-
-  return creators;
 }

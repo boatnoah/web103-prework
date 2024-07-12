@@ -10,8 +10,8 @@ interface Creator {
   created_at: string;
 }
 
-export default function useAllCreators() {
-  const [creators, setCreators] = useState<Creator[]>([]);
+export default function useCreator(id: number) {
+  const [creator, setCreator] = useState<Creator>();
 
   useEffect(() => {
     const fetchCreators = async () => {
@@ -19,11 +19,12 @@ export default function useAllCreators() {
         const { data, error } = await supabase
           .from("creators")
           .select()
-          .order("created_at", { ascending: true });
+          .eq("id", id)
+          .single();
 
         if (error) throw error;
 
-        setCreators(data);
+        setCreator(data);
       } catch (err) {
         console.error(err);
       }
@@ -32,5 +33,5 @@ export default function useAllCreators() {
     fetchCreators();
   }, []);
 
-  return creators;
+  return creator;
 }
