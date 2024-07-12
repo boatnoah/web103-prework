@@ -8,13 +8,13 @@ interface Creator {
   created_at?: string;
 }
 
-export default function useAddCreator() {
-  const addCreator = async ({ name, urls, description }: Creator) => {
+export default function useUpdateCreator(id: string | undefined) {
+  const updateCreator = async ({ name, urls, description }: Creator) => {
     try {
       const { data, error } = await supabase
         .from("creators")
-        .insert({ name: name, urls, description })
-        .select();
+        .update({ name: name, urls, description })
+        .eq("id", id);
 
       if (error) throw error;
 
@@ -24,5 +24,5 @@ export default function useAddCreator() {
     }
   };
 
-  return addCreator;
+  return updateCreator;
 }

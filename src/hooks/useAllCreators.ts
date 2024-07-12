@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { supabase } from "../client";
 
 interface Creator {
-  id: number;
+  id: string;
   name: string;
-  url: string;
+  urls: string[];
   description: string;
-  imageURL: string;
   created_at: string;
 }
 

@@ -1,6 +1,5 @@
 import useAllCreators from "../hooks/useAllCreators"
 import Card from "../components/Card";
-import { Link } from "react-router-dom";
 const ShowAllCreators = () => {
   const creatorsList = useAllCreators();
 
@@ -8,9 +7,7 @@ const ShowAllCreators = () => {
     <div>
       {
         creatorsList && creatorsList.map((creator) => (
-          <Link to={`view/${creator.id}`} key={creator.id}>
-            <Card name={creator.name} description={creator.description} />
-          </Link>
+          <Card name={creator.name} description={creator.description} id={creator.id} />
         ))
       }
     </div >

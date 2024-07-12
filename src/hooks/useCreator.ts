@@ -2,15 +2,14 @@ import { useState, useEffect } from "react";
 import { supabase } from "../client";
 
 interface Creator {
-  id: number;
+  id: string;
   name: string;
-  url: string;
+  urls: string[];
   description: string;
-  imageURL: string;
   created_at: string;
 }
 
-export default function useCreator(id: number) {
+export default function useCreator(id: string | undefined) {
   const [creator, setCreator] = useState<Creator>();
 
   useEffect(() => {
