@@ -1,17 +1,22 @@
-import useAllCreators from "../hooks/useAllCreators"
+import useAllCreators from "../hooks/useAllCreators";
 import Card from "../components/Card";
+
 const ShowAllCreators = () => {
   const creatorsList = useAllCreators();
 
   return (
-    <div>
-      {
-        creatorsList && creatorsList.map((creator) => (
-          <Card name={creator.name} description={creator.description} id={creator.id} />
+    <div className="grid grid-cols-3 h-screen w-full">
+      {creatorsList && creatorsList.length > 0 ? (
+        creatorsList.map((creator) => (
+          <Card key={creator.id} name={creator.name} description={creator.description} id={creator.id} />
         ))
-      }
-    </div >
-  )
-}
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <h1 className="text-bold text-black text-center text-5xl">No creators available</h1>
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default ShowAllCreators
+export default ShowAllCreators;

@@ -19,7 +19,7 @@ const Card = ({ name, description, id }: CardInfo) => {
 
 
   return (
-    <div className="flex flex-col border border-black m-10 p-10 w-1/5 rounded-lg bg-gray-100 gap-4">
+    <div className="flex flex-col border border-black m-10 p-10 rounded-lg bg-gray-100 gap-4 max-w-sm mx-auto h-auto shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
       <div onClick={handleDivClick}>
         <h1 className="text-3xl font-bold">{name || "Name"}</h1>
         <h2 className="text-lg font-semibold">Description</h2>
