@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div className="flex h-full w-64">
+    <div className="flex h-screen w-64">
       <div className="flex-col">
         <div className="flex items-center gap-2 px-6 py-4">
           <Link to="/all" className="flex items-center gap-2">

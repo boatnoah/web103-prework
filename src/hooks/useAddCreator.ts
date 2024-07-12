@@ -1,38 +1,29 @@
-import { useEffect } from "react";
 import { supabase } from "../client";
 
 interface Creator {
-  id: number;
+  id?: number;
   name: string;
   url: string;
   description: string;
   imageURL: string;
-  created_at: string;
+  created_at?: string;
 }
 
-export default function useAllCreators({
-  name,
-  url,
-  description,
-  imageURL,
-}: Creator) {
-  useEffect(() => {
-    const fetchCreators = async () => {
-      try {
-        await supabase
-          .from("creators")
-          .insert({
-            name: name,
-            url: url,
-            description: description,
-            imageURL: imageURL,
-          })
-          .select();
-      } catch (err) {
-        console.error(err);
-      }
-    };
+export default function useAddCreator() {
+  const addCreator = async ({ name, url, description, imageURL }: Creator) => {
+    try {
+      const { data, error } = await supabase
+        .from("creators")
+        .insert({ name: name, url: url, description, imageURL })
+        .select();
 
-    fetchCreators();
-  }, []);
+      if (error) throw error;
+
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return addCreator;
 }
